@@ -1,13 +1,12 @@
 import mongoose from 'mongoose'
 
-const getTodaysDate = () => {
+export const getTodaysDate = () => {
     const today = new Date()
     const year = today.getFullYear()
     const month = today.getMonth()
     const date = today.getDate()
     return new Date(year, month, date)
 }
-
 const activitySchema = new mongoose.Schema({
     date: {
         type: Date,
@@ -35,9 +34,6 @@ const activitySchema = new mongoose.Schema({
     }
 })
 
-const Activity = mongoose.model('Activity', activitySchema)
+const Activity = mongoose.models.Activity || mongoose.model('Activity', activitySchema)
 
-module.exports = { 
-    Activity,
-    getTodaysDate
-}
+export default Activity 

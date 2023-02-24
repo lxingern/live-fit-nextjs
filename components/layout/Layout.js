@@ -5,7 +5,7 @@ const Layout = (props) => {
 return (
     <Fragment>
         <MainNavigation />
-        <main>{props.children}</main>
+        <main className="w-1/3 mx-auto p-4 border">{props.children}</main>
     </Fragment>
 )
 }

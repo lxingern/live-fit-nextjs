@@ -4,6 +4,7 @@ import ActivityList from "./ActivityList"
 
 const Dashboard = () => {
     let todaysData = null
+    let posts = null
     
     const getTodaysData = async () => {
         const response = await fetch('/api/activity/get-todays-data')
@@ -20,7 +21,7 @@ const Dashboard = () => {
                 <Donut count={todaysData ? todaysData.data.activeMinutes : 0} unit="mins" />
             </div>
             <div className="w-2/3 text-lg">
-                <ActivityList />
+                <ActivityList posts={todaysData} />
             </div>
         </div>
     )

@@ -1,11 +1,12 @@
 const ActivityList = (props) => {
+
     return (
         <ul>
-            {props.posts && props.posts.map(post => (
+            {props.data && props.data.data.activities.map(activity => (
                 <li>
                     <div className="flex justify-between mb-2 shadow py-2 px-4">
-                        <p>{post.name}</p>
-                        <p>{post.duration} mins</p>
+                        <p>{activity.name}</p>
+                        <p>{activity.duration} mins</p>
                     </div>
                 </li>
             ))}

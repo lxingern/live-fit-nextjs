@@ -2,16 +2,8 @@ import dayjs from "dayjs"
 import Donut from "./Donut"
 import ActivityList from "./ActivityList"
 
-const Dashboard = () => {
-    let todaysData = null
-    let posts = null
-    
-    const getTodaysData = async () => {
-        const response = await fetch('/api/activity/get-todays-data')
-        todaysData = await response.json()
-    } 
-
-    getTodaysData()
+const Dashboard = (props) => {
+    const todaysData = props.data
 
     return (
         <div className="flex flex-col items-center">
@@ -21,7 +13,7 @@ const Dashboard = () => {
                 <Donut count={todaysData ? todaysData.data.activeMinutes : 0} unit="mins" />
             </div>
             <div className="w-2/3 text-lg">
-                <ActivityList posts={todaysData} />
+                <ActivityList data={todaysData} />
             </div>
         </div>
     )

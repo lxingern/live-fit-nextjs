@@ -1,20 +1,10 @@
 import Head from 'next/head'
 import Dashboard from '@/components/activity/Dashboard'
+import useSWR from 'swr'
 
+export default function Home() {
+  const { data, error, isLoading } = useSWR('/api/activity/get-todays-data', (url) => fetch(url).then(res => res.json()))
 
-export async function getStaticProps() {
-  const response = await fetch(`http://localhost:3000/api/activity/get-todays-data`)
-  const data = await response.json()
-
-  return {
-    props: {
-      data
-    },
-    revalidate: 10
-  }
-}
-
-export default function Home(props) {
   return (
     <>
       <Head>
@@ -22,7 +12,7 @@ export default function Home(props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Dashboard data={props.data} />
+      {isLoading ? <p>Loading...</p> : <Dashboard data={data} />}
     </>
   )
 }

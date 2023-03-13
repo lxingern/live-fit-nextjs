@@ -5,17 +5,23 @@ import ActivityList from "./ActivityList"
 import Modal from "../UI/Modal"
 
 const Dashboard = (props) => {
-    const todaysData = props.data
     const [showEditSteps, setShowEditSteps] = useState(false)
-
+    const [showEditActiveMins, setShowActiveMins] = useState(false)
+    
     const showEditStepsHandler = () => {
         setShowEditSteps(true)
-        console.log('clicked')
+    }
+
+    const showEditActiveMinsHandler = () => {
+        setShowActiveMins(true)
     }
 
     const closeModal = () => {
         setShowEditSteps(false)
+        setShowActiveMins(false)
     }
+    
+    const todaysData = props.data
 
     return (
         <div className="flex flex-col items-center">
@@ -31,7 +37,16 @@ const Dashboard = (props) => {
                         </form>
                     </Modal>
                 )}
-                <Donut count={todaysData ? todaysData.data.activeMinutes : 0} unit="mins" />
+                <Donut count={todaysData ? todaysData.data.activeMinutes : 0} unit="mins" clickHandler={showEditActiveMinsHandler} />
+                {showEditActiveMins && (
+                    <Modal onClose={closeModal} > 
+                        <h2>Edit Active Minutes</h2>
+                        <form>
+                            <input type="number" />
+                            <button>Edit</button>
+                        </form>
+                    </Modal>
+                )}
             </div>
             <div className="w-2/3 text-lg">
                 <ActivityList data={todaysData} />

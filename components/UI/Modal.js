@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import ReactDOM from "react-dom"
 
-const Backdrop = () => {
-  return <div className="backdrop" />
+const Backdrop = (props) => {
+  return <div className="backdrop" onClick={props.onClose} />
 }
 
 const ModalOverlay = (props) => {
@@ -23,7 +23,7 @@ const Modal = (props) => {
   if (isBrowser) {
     return (
       <>
-        {ReactDOM.createPortal(<Backdrop />, document.getElementById('overlays'))}
+        {ReactDOM.createPortal(<Backdrop onClose={props.onClose} />, document.getElementById('overlays'))}
         {ReactDOM.createPortal(<ModalOverlay>{props.children}</ModalOverlay>, document.getElementById('overlays'))}
       </>
     )
